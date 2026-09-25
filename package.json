@@ -17,7 +17,7 @@
     }
   },
   "bin": {
-    "rekt": "./bin/rekt.mjs"
+    "rekt": "bin/rekt.mjs"
   },
   "files": [
     "dist",
