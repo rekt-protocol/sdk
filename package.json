@@ -1,0 +1,64 @@
+{
+  "name": "@rekt-protocol/sdk",
+  "version": "1.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Official TypeScript SDK for REKT (Rescue EVM Kit Tool) — Web3 defensive toolkit for rescuing compromised wallets, gas sponsorship, revoking allowances, and neutralizing EIP-7702 delegations.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "bin": {
+    "rekt": "./bin/rekt.mjs"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test"
+  },
+  "keywords": [
+    "rekt",
+    "evm",
+    "asset-recovery",
+    "flashbots",
+    "gas-sponsor",
+    "eip-7702",
+    "eip-712",
+    "permit2",
+    "permit",
+    "security",
+    "web3"
+  ],
+  "author": "REKT Protocol",
+  "license": "MIT",
+  "homepage": "https://rekt.zip",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rekt-protocol/sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rekt-protocol/sdk/issues"
+  },
+  "dependencies": {
+    "viem": "^2.34.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.6",
+    "typescript": "^5.7.3"
+  }
+}

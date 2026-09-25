@@ -1,0 +1,15 @@
+# Dependencies & outputs
+node_modules
+dist
+*.tgz
+.DS_Store
+.env
+
+# Private source files (not published to GitHub)
+src
+bin
+test
+tsup.config.ts
+tsconfig.json
+pnpm-lock.yaml
+pnpm-workspace.yaml
