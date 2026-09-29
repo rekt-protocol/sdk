@@ -184,8 +184,8 @@ npx rekt networks
 # Query verified referrer status
 npx rekt referrer partner_handle
 
-# Audit EIP-7702 delegation on a specific network
-npx rekt check-7702 0x1234567890abcdef1234567890abcdef12345678 --network base-sepolia-testnet
+# Sync latest network endpoints and smart contract ABIs to local cache
+npx rekt update
 ```
 
 ---
