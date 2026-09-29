@@ -1,5 +1,4 @@
 import { RektClient } from '@rekt-protocol/sdk';
-import { privateKeyToAccount } from 'viem/accounts';
 
 // Config
 const CHAIN_ID = 84532; // Base Sepolia Testnet (e.g. 1 for Ethereum, 8453 for Base, 56 for BSC, etc.)
@@ -14,8 +13,6 @@ const SAFE_RECEIVER_ADDRESS = '0x...' as `0x${string}`; // Clean cold wallet des
 const TOKEN_ADDRESS = '0x...' as `0x${string}`; // ERC-20 token to rescue (e.g. USDT, USDC)
 
 async function main() {
-  const compromisedAccount = privateKeyToAccount(COMPROMISED_PRIVATE_KEY);
-
   // 1. Initialize SDK (auto-shuffles multiple RPCs and fails over on error)
   const rekt = await RektClient.create({
     chainId: CHAIN_ID,
@@ -23,9 +20,8 @@ async function main() {
   });
 
   // 2. Execute sponsored token rescue
-  console.log(`Rescuing tokens from compromised wallet ${compromisedAccount.address}...`);
+  console.log('Rescuing tokens from compromised wallet...');
   const txHash = await rekt.rescue.executeRescueTokens({
-    compromisedAddress: compromisedAccount.address,
     compromisedPrivateKey: COMPROMISED_PRIVATE_KEY,
     sponsorPrivateKey: SPONSOR_PRIVATE_KEY,
     safeReceiver: SAFE_RECEIVER_ADDRESS,
