@@ -1,27 +1,27 @@
 import { RektClient } from '@rekt-protocol/sdk';
 
-// Config
-const CHAIN_ID = 84532; // Target EVM Chain ID (e.g. 8453 for Base, 1 for Ethereum, 84532 for Base Sepolia)
+// Configuration
+const CHAIN_ID = 84532; // Target EVM Chain ID (e.g., 8453 for Base, 1 for Ethereum, 84532 for Base Sepolia)
 const RPC_URLS = [
   'https://sepolia.base.org',
   'https://base-sepolia-rpc.publicnode.com',
-  // 'https://...', // Add custom Alchemy/Infura RPC
+  // 'https://...', // Optional custom provider RPC URL
 ];
-const SPONSOR_PRIVATE_KEY = '0x...'; // Clean wallet paying transaction gas fees (ETH)
-const COMPROMISED_PRIVATE_KEY = '0x...'; // Hacked wallet private key (used ONLY for off-chain permit signature)
-const SAFE_RECEIVER_ADDRESS = '0x...'; // Clean cold wallet destination for rescued assets
-const AIRDROP_CONTRACT_ADDRESS = '0x...'; // Airdrop distributor contract to claim from
-const CLAIM_CALLDATA = '0x4e71d92d'; // ABI-encoded claim() payload
-const REWARD_TOKEN_ADDRESS = '0x...'; // ERC-20 token contract released by the airdrop
+const SPONSOR_PRIVATE_KEY = '0x...'; // Sponsor private key funding transaction gas
+const COMPROMISED_PRIVATE_KEY = '0x...'; // Compromised account private key (used solely for EIP-712 authorization)
+const SAFE_RECEIVER_ADDRESS = '0x...'; // Secure destination wallet address for rescued assets
+const AIRDROP_CONTRACT_ADDRESS = '0x...'; // Airdrop distributor contract address to execute claim from
+const CLAIM_CALLDATA = '0x4e71d92d'; // ABI-encoded claim() calldata payload
+const REWARD_TOKEN_ADDRESS = '0x...'; // ERC-20 reward token address disbursed by the airdrop contract
 
 async function main() {
-  // 1. Initialize SDK (auto-shuffles multiple RPCs and fails over on error)
+  // 1. Initialize the REKT SDK with multi-RPC support
   const rekt = await RektClient.create({
     chainId: CHAIN_ID,
     rpcUrls: RPC_URLS,
   });
 
-  // 2. Atomically claim airdrop & transfer directly to safe cold wallet
+  // 2. Atomically execute claim and rescue directly to secure destination wallet
   console.log('Executing atomic claim and rescue...');
   const txHash = await rekt.rescue.executeClaimRescue({
     compromisedPrivateKey: COMPROMISED_PRIVATE_KEY,
